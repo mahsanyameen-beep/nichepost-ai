@@ -41,7 +41,7 @@ export default function Image({ params }: ImageProps) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(180deg, #fafaf9 0%, #f5f5f4 100%)",
+          background: "#0A0A1F",
           padding: "72px",
           position: "relative",
           fontFamily: "Inter, system-ui, sans-serif",
@@ -53,8 +53,24 @@ export default function Image({ params }: ImageProps) {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(to right, rgba(120,113,108,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,113,108,0.07) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
             backgroundSize: "48px 48px",
+            display: "flex",
+          }}
+        />
+
+        {/* Amber bottom-left glow */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-180px",
+            left: "-160px",
+            width: "640px",
+            height: "640px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,163,77,0.32) 0%, rgba(255,163,77,0.10) 45%, transparent 75%)",
+            display: "flex",
           }}
         />
 
@@ -72,11 +88,11 @@ export default function Image({ params }: ImageProps) {
               width: "44px",
               height: "44px",
               borderRadius: "11px",
-              background: "linear-gradient(135deg, #0d9488 0%, #047857 100%)",
+              background: "linear-gradient(135deg, #FF6B9D 0%, #FF9472 100%)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 4px 14px rgba(13,148,136,0.25)",
+              boxShadow: "0 6px 18px rgba(255,107,157,0.40)",
             }}
           >
             <svg
@@ -96,7 +112,7 @@ export default function Image({ params }: ImageProps) {
             style={{
               fontSize: "24px",
               fontWeight: 600,
-              color: "#1c1917",
+              color: "#FFFFFF",
               letterSpacing: "-0.01em",
             }}
           >
@@ -107,9 +123,10 @@ export default function Image({ params }: ImageProps) {
               marginLeft: "auto",
               fontSize: "16px",
               fontWeight: 500,
-              color: "#78716c",
+              color: "#A0A0B8",
               textTransform: "uppercase",
               letterSpacing: "0.15em",
+              display: "flex",
             }}
           >
             Blog
@@ -126,7 +143,7 @@ export default function Image({ params }: ImageProps) {
             fontWeight: 600,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#0f766e",
+            color: "#FF7A95",
             marginBottom: "20px",
             position: "relative",
           }}
@@ -141,7 +158,7 @@ export default function Image({ params }: ImageProps) {
             fontWeight: 700,
             lineHeight: 1.1,
             letterSpacing: "-0.025em",
-            color: "#1c1917",
+            color: "#FFFFFF",
             maxWidth: "1040px",
             marginBottom: "24px",
             display: "flex",
@@ -155,7 +172,7 @@ export default function Image({ params }: ImageProps) {
         <div
           style={{
             fontSize: "24px",
-            color: "#57534e",
+            color: "#A0A0B8",
             lineHeight: 1.4,
             maxWidth: "980px",
             display: "flex",

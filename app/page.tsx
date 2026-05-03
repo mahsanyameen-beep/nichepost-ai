@@ -41,17 +41,18 @@ export default function Home() {
   }, [hasResults, result]);
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
+    <div className="min-h-screen bg-ink text-white">
       <Nav />
       <main>
         <Hero />
 
         <section
           id="generate"
-          className="scroll-mt-20 px-4 pb-20 sm:pb-28"
+          className="relative scroll-mt-20 px-4 pb-20 sm:pb-28"
           aria-label="Generator"
         >
-          <div className="mx-auto flex max-w-6xl flex-col items-center gap-12">
+          <PurpleGlow />
+          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-12">
             <GeneratorForm onResult={setResult} />
 
             {hasResults && (
@@ -84,11 +85,13 @@ function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/60 bg-stone-50/80 backdrop-blur-md dark:border-stone-800/60 dark:bg-stone-950/75">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-ink/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
         <Link href="#top" className="flex items-center gap-2" aria-label="NichePost AI home">
           <Logo />
-          <span className="text-base font-semibold tracking-tight">NichePost AI</span>
+          <span className="text-base font-semibold tracking-tight text-white">
+            NichePost AI
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -97,7 +100,7 @@ function Nav() {
           <NavLink href="/blog">Blog</NavLink>
           <Link
             href="#generate"
-            className="inline-flex items-center gap-1.5 rounded-full bg-stone-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-stone-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-white"
+            className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-4 py-2 text-sm font-medium text-white shadow-lg shadow-[#FF6B9D]/20 transition hover:shadow-xl hover:shadow-[#FF6B9D]/30 hover:brightness-110"
           >
             Try it free
             <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -109,14 +112,14 @@ function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-stone-700 hover:bg-stone-200/60 md:hidden dark:text-stone-300 dark:hover:bg-stone-800/60"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-mute transition hover:bg-white/5 hover:text-white md:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-stone-200/60 bg-stone-50 md:hidden dark:border-stone-800/60 dark:bg-stone-950">
+        <div className="border-t border-hairline bg-ink md:hidden">
           <nav
             className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3"
             aria-label="Mobile primary"
@@ -133,7 +136,7 @@ function Nav() {
             <Link
               href="#generate"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-white dark:bg-stone-100 dark:text-stone-900"
+              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-4 py-2.5 text-sm font-medium text-white"
             >
               Try it free
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -147,7 +150,7 @@ function Nav() {
 
 function Logo() {
   return (
-    <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-teal-600 to-emerald-700 text-white shadow-sm shadow-teal-700/20">
+    <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
       <Sparkles className="h-3.5 w-3.5" aria-hidden />
     </span>
   );
@@ -157,7 +160,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+      className="text-sm font-medium text-mute transition hover:text-white"
     >
       {children}
     </Link>
@@ -177,7 +180,7 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="rounded-lg px-3 py-2.5 text-sm font-medium text-stone-700 hover:bg-stone-200/60 dark:text-stone-300 dark:hover:bg-stone-800/60"
+      className="rounded-lg px-3 py-2.5 text-sm font-medium text-mute transition hover:bg-white/5 hover:text-white"
     >
       {children}
     </Link>
@@ -196,19 +199,15 @@ function Hero() {
       <HeroBackground />
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 dark:text-teal-400">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           AI-Powered Content Calendars
         </p>
 
-        <h1 className="text-balance text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-50">
-          A week of social posts
-          <br className="hidden sm:inline" />{" "}
-          <span className="bg-gradient-to-r from-teal-700 to-emerald-700 bg-clip-text text-transparent dark:from-teal-400 dark:to-emerald-400">
-            in 30 seconds
-          </span>
+        <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          A week of social posts in <span className="text-accent">30 seconds</span>
         </h1>
 
-        <p className="max-w-xl text-pretty text-base leading-relaxed text-stone-600 sm:text-lg dark:text-stone-400">
+        <p className="max-w-xl text-pretty text-base leading-relaxed text-mute sm:text-lg">
           Tell us your niche, pick a platform and tone, and get seven on-brand posts
           plus a matching cover image — written by AI, ready to publish.
         </p>
@@ -220,8 +219,9 @@ function Hero() {
 function HeroBackground() {
   return (
     <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+      {/* Subtle grid pattern with radial fade */}
       <div
-        className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.stone.200/55)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.stone.200/55)_1px,transparent_1px)] bg-[size:48px_48px] dark:bg-[linear-gradient(to_right,theme(colors.stone.800/40)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.stone.800/40)_1px,transparent_1px)]"
+        className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:48px_48px]"
         style={{
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 30%, black 0%, transparent 75%)",
@@ -229,9 +229,41 @@ function HeroBackground() {
             "radial-gradient(ellipse 70% 60% at 50% 30%, black 0%, transparent 75%)",
         }}
       />
-      <div className="absolute left-1/2 top-0 -translate-x-1/2 -z-10">
-        <div className="h-[480px] w-[680px] rounded-full bg-gradient-to-br from-teal-200/40 via-emerald-200/30 to-transparent blur-3xl dark:from-teal-700/10 dark:via-emerald-700/10" />
-      </div>
+
+      {/* Warm amber glow — bottom left (signature element) */}
+      <div
+        className="absolute -bottom-32 -left-40 h-[640px] w-[640px] rounded-full sm:-bottom-40 sm:-left-32"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,163,77,0.30) 0%, rgba(255,163,77,0.12) 35%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
+
+      {/* Soft pink-coral highlight on the opposite side for balance */}
+      <div
+        className="absolute -right-40 -top-32 h-[520px] w-[520px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,107,157,0.18) 0%, rgba(255,107,157,0.06) 40%, transparent 70%)",
+          filter: "blur(90px)",
+        }}
+      />
+    </div>
+  );
+}
+
+function PurpleGlow() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div
+        className="absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{
+          background:
+            "radial-gradient(ellipse, rgba(107,91,209,0.18) 0%, rgba(107,91,209,0.05) 50%, transparent 75%)",
+          filter: "blur(70px)",
+        }}
+      />
     </div>
   );
 }
@@ -263,13 +295,15 @@ function HowItWorks() {
   return (
     <section
       id="how"
-      className="scroll-mt-20 border-t border-stone-200/70 bg-white px-4 py-20 sm:py-28 dark:border-stone-800/70 dark:bg-stone-950"
+      className="scroll-mt-20 border-t border-hairline px-4 py-20 sm:py-28"
       aria-label="How it works"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="How it works"
-          title="From blank page to published, in three steps."
+          titleBefore="From blank page to published, in "
+          titleHighlight="three steps"
+          titleAfter="."
           subtitle="No prompt engineering, no template wrangling. Just enough input to get something genuinely yours."
         />
 
@@ -277,22 +311,20 @@ function HowItWorks() {
           {steps.map((step) => (
             <li
               key={step.number}
-              className="group relative flex flex-col gap-4 rounded-2xl border border-stone-200 bg-stone-50/60 p-6 transition-colors hover:border-stone-300 sm:p-8 dark:border-stone-800 dark:bg-stone-900/40 dark:hover:border-stone-700"
+              className="group relative flex flex-col gap-4 rounded-2xl border border-hairline bg-panel p-6 transition hover:border-white/15 sm:p-8"
             >
               <div className="flex items-center justify-between">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-stone-900 text-white shadow-sm dark:bg-stone-100 dark:text-stone-900">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
                   <step.Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <span className="font-mono text-xs font-medium tracking-wider text-stone-400 dark:text-stone-600">
+                <span className="font-mono text-xs font-medium tracking-wider text-mute/60">
                   {step.number}
                 </span>
               </div>
-              <h3 className="text-lg font-semibold tracking-tight text-stone-900 dark:text-stone-50">
+              <h3 className="text-lg font-semibold tracking-tight text-white">
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                {step.body}
-              </p>
+              <p className="text-sm leading-relaxed text-mute">{step.body}</p>
             </li>
           ))}
         </ol>
@@ -330,13 +362,15 @@ function Benefits() {
   return (
     <section
       id="features"
-      className="scroll-mt-20 border-t border-stone-200/70 px-4 py-20 sm:py-28 dark:border-stone-800/70"
+      className="scroll-mt-20 border-t border-hairline px-4 py-20 sm:py-28"
       aria-label="Why niche-specific?"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Why niche-specific?"
-          title="Generic prompts make generic posts."
+          titleBefore="Generic prompts make "
+          titleHighlight="generic posts"
+          titleAfter="."
           subtitle="The defaults are the problem. NichePost AI tunes every variable that matters — voice, length, hashtags, visual — to your niche specifically."
         />
 
@@ -344,17 +378,15 @@ function Benefits() {
           {benefits.map((b) => (
             <article
               key={b.title}
-              className="group flex flex-col gap-3 rounded-2xl border border-stone-200 bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-lg sm:p-7 dark:border-stone-800 dark:bg-stone-950 dark:hover:border-stone-700 dark:hover:shadow-black/40"
+              className="group flex flex-col gap-3 rounded-2xl border border-hairline bg-panel p-6 transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-lg hover:shadow-black/30 sm:p-7"
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-700 ring-1 ring-teal-100 dark:bg-teal-900/20 dark:text-teal-400 dark:ring-teal-900/40">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent ring-1 ring-accent/20">
                 <b.Icon className="h-5 w-5" aria-hidden />
               </span>
-              <h3 className="text-base font-semibold tracking-tight text-stone-900 dark:text-stone-50">
+              <h3 className="text-base font-semibold tracking-tight text-white">
                 {b.title}
               </h3>
-              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                {b.body}
-              </p>
+              <p className="text-sm leading-relaxed text-mute">{b.body}</p>
             </article>
           ))}
         </div>
@@ -367,24 +399,28 @@ function Benefits() {
 
 function SectionHeader({
   eyebrow,
-  title,
+  titleBefore,
+  titleHighlight,
+  titleAfter,
   subtitle,
 }: {
   eyebrow: string;
-  title: string;
+  titleBefore: string;
+  titleHighlight: string;
+  titleAfter?: string;
   subtitle: string;
 }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 dark:text-teal-400">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl dark:text-stone-50">
-        {title}
+      <h2 className="mt-3 text-balance text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl">
+        {titleBefore}
+        <span className="text-accent">{titleHighlight}</span>
+        {titleAfter}
       </h2>
-      <p className="mt-4 text-base leading-relaxed text-stone-600 dark:text-stone-400">
-        {subtitle}
-      </p>
+      <p className="mt-4 text-base leading-relaxed text-mute">{subtitle}</p>
     </div>
   );
 }
@@ -394,39 +430,42 @@ function SectionHeader({
 function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-stone-200/70 bg-stone-100/50 dark:border-stone-800/70 dark:bg-stone-950">
+    <footer className="border-t border-hairline bg-ink">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:py-14">
         <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
           <div className="space-y-3">
             <Link href="#top" className="flex items-center gap-2">
               <Logo />
-              <span className="text-base font-semibold tracking-tight">
+              <span className="text-base font-semibold tracking-tight text-white">
                 NichePost AI
               </span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            <p className="max-w-xs text-sm leading-relaxed text-mute">
               A small tool for the unfortunately large problem of staring at a
               blank caption box.
             </p>
           </div>
 
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Footer">
-            <Link href="#generate" className="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">
+          <nav
+            className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
+            aria-label="Footer"
+          >
+            <Link href="#generate" className="text-mute transition hover:text-white">
               Generate
             </Link>
-            <Link href="#how" className="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">
+            <Link href="#how" className="text-mute transition hover:text-white">
               How it works
             </Link>
-            <Link href="#features" className="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">
+            <Link href="#features" className="text-mute transition hover:text-white">
               Features
             </Link>
-            <Link href="/blog" className="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">
+            <Link href="/blog" className="text-mute transition hover:text-white">
               Blog
             </Link>
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-stone-200/70 pt-6 text-xs text-stone-500 sm:flex-row sm:items-center dark:border-stone-800/70 dark:text-stone-500">
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-hairline pt-6 text-xs text-mute/80 sm:flex-row sm:items-center">
           <p>© {year} NichePost AI. All rights reserved.</p>
           <p>
             Posts and images are AI-generated. Review before publishing — you&apos;re

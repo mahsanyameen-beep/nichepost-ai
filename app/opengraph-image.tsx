@@ -15,8 +15,7 @@ export default function Image() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background:
-            "linear-gradient(135deg, #fafaf9 0%, #f5f5f4 50%, #e7e5e4 100%)",
+          background: "#0A0A1F",
           padding: "80px",
           position: "relative",
           fontFamily: "Inter, system-ui, sans-serif",
@@ -28,23 +27,38 @@ export default function Image() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(to right, rgba(120,113,108,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,113,108,0.08) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
             backgroundSize: "48px 48px",
-            opacity: 0.6,
+            display: "flex",
           }}
         />
 
-        {/* Soft teal glow */}
+        {/* Warm amber glow — bottom-left signature */}
         <div
           style={{
             position: "absolute",
-            top: "-200px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "900px",
-            height: "500px",
+            bottom: "-220px",
+            left: "-180px",
+            width: "780px",
+            height: "780px",
+            borderRadius: "50%",
             background:
-              "radial-gradient(ellipse at center, rgba(13,148,136,0.18) 0%, rgba(16,185,129,0.10) 30%, transparent 70%)",
+              "radial-gradient(circle, rgba(255,163,77,0.40) 0%, rgba(255,163,77,0.15) 40%, transparent 75%)",
+            display: "flex",
+          }}
+        />
+
+        {/* Pink-coral counter-glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-180px",
+            right: "-160px",
+            width: "620px",
+            height: "620px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,107,157,0.30) 0%, rgba(255,107,157,0.10) 45%, transparent 75%)",
             display: "flex",
           }}
         />
@@ -63,11 +77,11 @@ export default function Image() {
               width: "56px",
               height: "56px",
               borderRadius: "14px",
-              background: "linear-gradient(135deg, #0d9488 0%, #047857 100%)",
+              background: "linear-gradient(135deg, #FF6B9D 0%, #FF9472 100%)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 6px 20px rgba(13,148,136,0.30)",
+              boxShadow: "0 8px 24px rgba(255,107,157,0.40)",
             }}
           >
             <svg
@@ -87,7 +101,7 @@ export default function Image() {
             style={{
               fontSize: "32px",
               fontWeight: 600,
-              color: "#1c1917",
+              color: "#FFFFFF",
               letterSpacing: "-0.02em",
             }}
           >
@@ -113,7 +127,8 @@ export default function Image() {
               fontWeight: 600,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#0f766e",
+              color: "#FF7A95",
+              display: "flex",
             }}
           >
             AI-Powered Content Calendars
@@ -127,28 +142,20 @@ export default function Image() {
               fontWeight: 700,
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
-              color: "#1c1917",
+              color: "#FFFFFF",
               maxWidth: "1000px",
             }}
           >
-            <span>A week of social posts</span>
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, #0f766e 0%, #047857 100%)",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              in 30 seconds.
-            </span>
+            <span>A week of social posts in</span>
+            <span style={{ color: "#FF7A95" }}>30 seconds.</span>
           </div>
           <div
             style={{
               fontSize: "26px",
-              color: "#57534e",
+              color: "#A0A0B8",
               lineHeight: 1.4,
               maxWidth: "920px",
+              display: "flex",
             }}
           >
             {SITE_DESCRIPTION}

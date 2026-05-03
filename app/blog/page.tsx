@@ -22,28 +22,28 @@ export default function BlogIndex() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16 sm:py-20">
       <header className="mb-12 space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 dark:text-teal-400">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           Blog
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl dark:text-stone-50">
-          Writing about writing.
+        <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl">
+          Writing about <span className="text-accent">writing</span>.
         </h1>
-        <p className="max-w-xl text-base leading-relaxed text-stone-600 dark:text-stone-400">
-          Short pieces on what makes AI-generated content actually work — and what
-          makes it slop.
+        <p className="max-w-xl text-base leading-relaxed text-mute">
+          Short pieces on what makes AI-generated content actually work — and
+          what makes it slop.
         </p>
       </header>
 
-      <ul className="divide-y divide-stone-200 border-y border-stone-200 dark:divide-stone-800 dark:border-stone-800">
+      <ul className="divide-y divide-hairline border-y border-hairline">
         {sorted.map((post) => (
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className="group flex flex-col gap-2 py-6 transition-colors sm:flex-row sm:items-baseline sm:gap-6"
+              className="group flex flex-col gap-2 py-6 transition sm:flex-row sm:items-baseline sm:gap-6"
             >
               <time
                 dateTime={post.date}
-                className="flex-none font-mono text-xs uppercase tracking-wider text-stone-500 sm:w-28 dark:text-stone-500"
+                className="flex-none font-mono text-xs uppercase tracking-wider text-mute/70 sm:w-28"
               >
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -52,10 +52,10 @@ export default function BlogIndex() {
                 })}
               </time>
               <div className="flex-1">
-                <h2 className="text-lg font-semibold tracking-tight text-stone-900 transition-colors group-hover:text-teal-700 dark:text-stone-100 dark:group-hover:text-teal-400">
+                <h2 className="text-lg font-semibold tracking-tight text-white transition group-hover:text-accent">
                   {post.title}
                 </h2>
-                <p className="mt-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                <p className="mt-1 text-sm leading-relaxed text-mute">
                   {post.description}
                 </p>
               </div>

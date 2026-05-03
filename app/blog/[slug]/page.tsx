@@ -26,7 +26,6 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
       description: post.description,
       url,
       publishedTime: post.date,
-      // OG image auto-derives from app/blog/[slug]/opengraph-image.tsx
     },
     twitter: {
       card: "summary_large_image",
@@ -50,25 +49,25 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     <main className="mx-auto max-w-3xl px-4 py-16 sm:py-20">
       <Link
         href="/blog"
-        className="text-sm font-medium text-stone-500 transition-colors hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+        className="text-sm font-medium text-mute transition hover:text-white"
       >
         ← All posts
       </Link>
 
       <article className="mt-8 space-y-6">
-        <header className="space-y-4 border-b border-stone-200 pb-8 dark:border-stone-800">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 dark:text-teal-400">
+        <header className="space-y-4 border-b border-hairline pb-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             {formattedDate} · {post.readingMinutes} min read
           </p>
-          <h1 className="text-balance text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl lg:text-5xl dark:text-stone-50">
+          <h1 className="text-balance text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
             {post.title}
           </h1>
-          <p className="text-pretty text-lg leading-relaxed text-stone-600 dark:text-stone-400">
+          <p className="text-pretty text-lg leading-relaxed text-mute">
             {post.description}
           </p>
         </header>
 
-        <div className="space-y-5 text-base leading-relaxed text-stone-700 dark:text-stone-300">
+        <div className="space-y-5 text-base leading-relaxed text-mute">
           {post.body
             .trim()
             .split(/\n\n+/)
@@ -77,10 +76,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             ))}
         </div>
 
-        <footer className="mt-12 border-t border-stone-200 pt-8 dark:border-stone-800">
+        <footer className="mt-12 border-t border-hairline pt-8">
           <Link
             href="/#generate"
-            className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-white"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#FF6B9D]/30 transition hover:shadow-xl hover:shadow-[#FF6B9D]/40 hover:brightness-110"
           >
             Try the generator →
           </Link>
@@ -97,8 +96,8 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
   if (others.length === 0) return null;
 
   return (
-    <section className="mt-16 border-t border-stone-200 pt-10 dark:border-stone-800">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-500">
+    <section className="mt-16 border-t border-hairline pt-10">
+      <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-mute">
         Keep reading
       </h2>
       <ul className="mt-5 space-y-4">
@@ -106,12 +105,12 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
           <li key={p.slug}>
             <Link
               href={`/blog/${p.slug}`}
-              className="group block rounded-xl border border-stone-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md dark:border-stone-800 dark:bg-stone-950 dark:hover:border-stone-700"
+              className="group block rounded-xl border border-hairline bg-panel p-5 transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-lg hover:shadow-black/40"
             >
-              <h3 className="text-base font-semibold tracking-tight text-stone-900 transition-colors group-hover:text-teal-700 dark:text-stone-100 dark:group-hover:text-teal-400">
+              <h3 className="text-base font-semibold tracking-tight text-white transition group-hover:text-accent">
                 {p.title}
               </h3>
-              <p className="mt-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+              <p className="mt-1 text-sm leading-relaxed text-mute">
                 {p.description}
               </p>
             </Link>

@@ -67,7 +67,7 @@ function SegmentedControl<T extends string>({
     <div
       role="radiogroup"
       aria-label={name}
-      className="grid grid-cols-3 gap-2 rounded-2xl bg-neutral-100 p-1.5 dark:bg-neutral-900"
+      className="grid grid-cols-3 gap-2 rounded-2xl border border-hairline bg-ink/60 p-1.5"
     >
       {options.map(({ value: optValue, label, Icon }) => {
         const selected = optValue === value;
@@ -80,15 +80,15 @@ function SegmentedControl<T extends string>({
             disabled={disabled}
             onClick={() => onChange(optValue)}
             className={[
-              "flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
-              "focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2",
+              "flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition",
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-0",
               "disabled:cursor-not-allowed disabled:opacity-50",
               selected
-                ? "bg-white text-neutral-900 shadow-sm ring-1 ring-black/5 dark:bg-neutral-800 dark:text-white dark:ring-white/10"
-                : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white",
+                ? "bg-gradient-to-br from-[#FF6B9D]/15 to-[#FF9472]/15 text-white ring-1 ring-accent/30"
+                : "text-mute hover:text-white",
             ].join(" ")}
           >
-            <Icon className="h-4 w-4" aria-hidden />
+            <Icon className={selected ? "h-4 w-4 text-accent" : "h-4 w-4"} aria-hidden />
             <span>{label}</span>
           </button>
         );
@@ -162,13 +162,13 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-2xl rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xl shadow-neutral-200/40 sm:p-8 dark:border-neutral-800 dark:bg-neutral-950 dark:shadow-black/40"
+      className="w-full max-w-2xl rounded-2xl border border-hairline bg-panel p-6 shadow-2xl shadow-black/40 sm:p-8"
     >
       <div className="space-y-6">
         <div>
           <label
             htmlFor="niche"
-            className="mb-2 block text-sm font-medium text-neutral-800 dark:text-neutral-200"
+            className="mb-2 block text-sm font-medium text-white"
           >
             Niche
           </label>
@@ -185,24 +185,23 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
             aria-invalid={nicheError ? "true" : "false"}
             aria-describedby={nicheError ? "niche-error" : undefined}
             className={[
-              "w-full rounded-xl border bg-white px-4 py-3 text-base text-neutral-900 placeholder:text-neutral-400 transition-shadow",
-              "focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-0",
+              "w-full rounded-xl border bg-ink/60 px-4 py-3 text-base text-white placeholder:text-mute/70 transition",
+              "focus:outline-none focus:ring-2 focus:ring-accent/40 focus:ring-offset-0",
               "disabled:cursor-not-allowed disabled:opacity-60",
-              "dark:bg-neutral-900 dark:text-white dark:placeholder:text-neutral-500",
               nicheError
-                ? "border-red-400 focus:ring-red-500 dark:border-red-500"
-                : "border-neutral-200 dark:border-neutral-800",
+                ? "border-red-500/60 focus:ring-red-500/40"
+                : "border-hairline focus:border-accent/40",
             ].join(" ")}
           />
           {nicheError && (
-            <p id="niche-error" className="mt-2 text-sm text-red-600 dark:text-red-400">
+            <p id="niche-error" className="mt-2 text-sm text-red-400">
               {nicheError}
             </p>
           )}
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-medium text-neutral-800 dark:text-neutral-200">
+          <span className="mb-2 block text-sm font-medium text-white">
             Platform
           </span>
           <SegmentedControl
@@ -215,7 +214,7 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-medium text-neutral-800 dark:text-neutral-200">
+          <span className="mb-2 block text-sm font-medium text-white">
             Tone
           </span>
           <SegmentedControl
@@ -231,10 +230,10 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
           type="submit"
           disabled={loading}
           className={[
-            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-teal-700/25 transition-all",
-            "bg-gradient-to-r from-teal-700 to-emerald-700",
-            "hover:shadow-xl hover:shadow-teal-700/30 hover:brightness-110",
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2",
+            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#FF6B9D]/30 transition",
+            "bg-gradient-to-br from-[#FF6B9D] to-[#FF9472]",
+            "hover:shadow-xl hover:shadow-[#FF6B9D]/40 hover:brightness-110",
+            "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel",
             "disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:brightness-100",
           ].join(" ")}
         >
@@ -268,13 +267,13 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
 
 function ErrorRow({ label, message }: { label: string; message: string }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm dark:border-red-900/50 dark:bg-red-950/30">
+    <div className="flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm">
       <span className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-red-500 text-[11px] font-bold text-white">
         !
       </span>
       <div className="min-w-0 flex-1">
-        <p className="font-medium text-red-900 dark:text-red-200">{label} failed</p>
-        <p className="mt-0.5 break-words text-red-700 dark:text-red-300/90">{message}</p>
+        <p className="font-medium text-red-200">{label} failed</p>
+        <p className="mt-0.5 break-words text-red-300/90">{message}</p>
       </div>
     </div>
   );

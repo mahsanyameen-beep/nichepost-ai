@@ -108,8 +108,14 @@ export default function ContentCalendar({
 
   return (
     <section className="w-full max-w-6xl space-y-8">
-      <div className="relative overflow-hidden rounded-3xl border border-neutral-200 shadow-xl shadow-neutral-200/50 dark:border-neutral-800 dark:shadow-black/40">
-        <div className="relative aspect-[16/7] w-full bg-neutral-200 dark:bg-neutral-900 sm:aspect-[16/6]">
+      <div
+        className="relative overflow-hidden rounded-3xl border border-hairline shadow-2xl shadow-black/50"
+        style={{
+          boxShadow:
+            "0 0 0 1px rgba(255,255,255,0.05), 0 30px 80px -20px rgba(107,91,209,0.30), 0 20px 50px -20px rgba(255,107,157,0.20)",
+        }}
+      >
+        <div className="relative aspect-[16/7] w-full bg-panel sm:aspect-[16/6]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={coverImage}
@@ -130,7 +136,7 @@ export default function ContentCalendar({
               <button
                 type="button"
                 onClick={handleDownloadImage}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
               >
                 {imageDownloaded ? (
                   <Check className="h-4 w-4 text-emerald-300" aria-hidden />
@@ -142,7 +148,7 @@ export default function ContentCalendar({
               <button
                 type="button"
                 onClick={handleDownloadAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition-all hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition-all hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
               >
                 {downloaded ? (
                   <Check className="h-4 w-4 text-emerald-600" aria-hidden />
@@ -177,9 +183,9 @@ function PostCard({ post }: { post: Post }) {
   }
 
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700 dark:hover:shadow-black/40">
+    <article className="group flex h-full flex-col rounded-2xl border border-hairline bg-panel p-5 shadow-lg shadow-black/30 transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-xl hover:shadow-black/40">
       <header className="flex items-start justify-between gap-3">
-        <div className="flex h-11 w-11 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-teal-600 to-emerald-600 text-white shadow-md shadow-teal-600/25">
+        <div className="flex h-11 w-11 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
           <span className="text-[9px] font-semibold uppercase tracking-wider opacity-80">
             Day
           </span>
@@ -188,20 +194,20 @@ function PostCard({ post }: { post: Post }) {
         <CopyButton copied={copied} onClick={handleCopy} />
       </header>
 
-      <h3 className="mt-4 text-base font-semibold leading-snug text-neutral-900 dark:text-white">
+      <h3 className="mt-4 text-base font-semibold leading-snug text-white">
         {post.title}
       </h3>
 
-      <p className="mt-2 flex-1 whitespace-pre-line text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      <p className="mt-2 flex-1 whitespace-pre-line text-sm leading-relaxed text-mute">
         {post.caption}
       </p>
 
       {post.hashtags.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-1.5 border-t border-neutral-100 pt-4 dark:border-neutral-800/70">
+        <div className="mt-4 flex flex-wrap gap-1.5 border-t border-hairline pt-4">
           {post.hashtags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+              className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs font-medium text-mute"
             >
               {tag.startsWith("#") ? tag : `#${tag}`}
             </span>
@@ -219,10 +225,10 @@ function CopyButton({ copied, onClick }: { copied: boolean; onClick: () => void 
         type="button"
         onClick={onClick}
         aria-label={copied ? "Copied to clipboard" : "Copy post"}
-        className="rounded-lg p-1.5 text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+        className="rounded-lg p-1.5 text-mute transition hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         {copied ? (
-          <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
+          <Check className="h-4 w-4 text-accent" aria-hidden />
         ) : (
           <Copy className="h-4 w-4" aria-hidden />
         )}
@@ -231,8 +237,8 @@ function CopyButton({ copied, onClick }: { copied: boolean; onClick: () => void 
         role="status"
         aria-live="polite"
         className={[
-          "pointer-events-none absolute -top-9 right-0 whitespace-nowrap rounded-md bg-neutral-900 px-2 py-1 text-xs font-medium text-white shadow-md transition-all",
-          "before:absolute before:left-1/2 before:top-full before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-neutral-900 before:content-['']",
+          "pointer-events-none absolute -top-9 right-0 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-xs font-medium text-white shadow-md ring-1 ring-hairline transition",
+          "before:absolute before:left-1/2 before:top-full before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-ink before:content-['']",
           copied ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
         ].join(" ")}
       >
