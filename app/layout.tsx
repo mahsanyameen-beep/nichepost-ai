@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import AnimatedBackground from "./components/AnimatedBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -85,7 +86,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
-      <body className="bg-ink font-sans text-white antialiased">{children}</body>
+      <body className="bg-ink font-sans text-white antialiased">
+        <AnimatedBackground />
+        {children}
+      </body>
     </html>
   );
 }
