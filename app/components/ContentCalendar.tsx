@@ -112,7 +112,7 @@ export default function ContentCalendar({
         className="relative overflow-hidden rounded-3xl border border-hairline shadow-2xl shadow-black/50"
         style={{
           boxShadow:
-            "0 0 0 1px rgba(255,255,255,0.05), 0 30px 80px -20px rgba(107,91,209,0.30), 0 20px 50px -20px rgba(255,107,157,0.20)",
+            "0 0 0 1px rgba(255,255,255,0.05), 0 30px 80px -20px rgba(107,91,209,0.30), 0 20px 50px -20px rgba(124,58,237,0.20)",
         }}
       >
         <div className="relative aspect-[16/7] w-full bg-panel sm:aspect-[16/6]">
@@ -185,7 +185,7 @@ function PostCard({ post }: { post: Post }) {
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-hairline bg-panel p-5 shadow-lg shadow-black/30 transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-xl hover:shadow-black/40">
       <header className="flex items-start justify-between gap-3">
-        <div className="flex h-11 w-11 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
+        <div className="flex h-11 w-11 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] text-white shadow-md shadow-[#7C3AED]/30">
           <span className="text-[9px] font-semibold uppercase tracking-wider opacity-80">
             Day
           </span>

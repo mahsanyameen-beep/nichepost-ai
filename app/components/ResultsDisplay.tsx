@@ -71,7 +71,7 @@ function ImagePanel({
             <a
               href={imageUrl}
               download={`nichepost-${slugify(niche)}.png`}
-              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#FF6B9D]/30 transition hover:shadow-lg hover:shadow-[#FF6B9D]/40 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel"
+              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#7C3AED]/30 transition hover:shadow-lg hover:shadow-[#7C3AED]/40 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel"
             >
               <Download className="h-4 w-4" aria-hidden />
               Download cover
@@ -130,7 +130,7 @@ function PostCard({ post }: { post: NonNullable<GeneratorResult["posts"]>[number
   return (
     <li className="group rounded-2xl border border-hairline bg-panel p-5 shadow-lg shadow-black/30 transition hover:border-white/15 hover:shadow-xl hover:shadow-black/40">
       <div className="flex items-start gap-4">
-        <div className="flex h-12 w-12 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
+        <div className="flex h-12 w-12 flex-none flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] text-white shadow-md shadow-[#7C3AED]/30">
           <span className="text-[10px] font-semibold uppercase tracking-wider opacity-80">
             Day
           </span>

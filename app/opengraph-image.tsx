@@ -58,7 +58,7 @@ export default function Image() {
             height: "620px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(255,107,157,0.30) 0%, rgba(255,107,157,0.10) 45%, transparent 75%)",
+              "radial-gradient(circle, rgba(124,58,237,0.30) 0%, rgba(124,58,237,0.10) 45%, transparent 75%)",
             display: "flex",
           }}
         />
@@ -77,11 +77,11 @@ export default function Image() {
               width: "56px",
               height: "56px",
               borderRadius: "14px",
-              background: "linear-gradient(135deg, #FF6B9D 0%, #FF9472 100%)",
+              background: "linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 8px 24px rgba(255,107,157,0.40)",
+              boxShadow: "0 8px 24px rgba(124,58,237,0.40)",
             }}
           >
             <svg
@@ -127,7 +127,7 @@ export default function Image() {
               fontWeight: 600,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#FF7A95",
+              color: "#A78BFA",
               display: "flex",
             }}
           >
@@ -147,7 +147,7 @@ export default function Image() {
             }}
           >
             <span>A week of social posts in</span>
-            <span style={{ color: "#FF7A95" }}>30 seconds.</span>
+            <span style={{ color: "#A78BFA" }}>30 seconds.</span>
           </div>
           <div
             style={{

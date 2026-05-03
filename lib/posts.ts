@@ -4,6 +4,7 @@ export interface Post {
   description: string;
   date: string;
   readingMinutes: number;
+  image: string;
   body: string;
 }
 
@@ -15,6 +16,7 @@ export const POSTS: Post[] = [
       "Templates make every brand sound the same. Niche-tuned prompts give the model the constraints it needs to write copy your audience actually recognizes.",
     date: "2026-04-12",
     readingMinutes: 4,
+    image: "/blog/why-niche.png",
     body: `Most "AI content" tools fail in the same way: they ship a template, swap a few keywords, and call it personalization. The output is recognizable from a mile away — the same three-paragraph structure, the same "Did you know?" opener, the same emoji cadence.
 
 The fix isn't a better template. It's giving the model enough information to make real choices.
@@ -30,6 +32,7 @@ Tighten your niche and the model has somewhere specific to go. Leave it loose an
       "Twitter rewards punch, LinkedIn rewards depth, Instagram rewards story. Picking the wrong format is a bigger drag on engagement than picking the wrong topic.",
     date: "2026-04-22",
     readingMinutes: 5,
+    image: "/blog/platform-lengths.png",
     body: `Length is a format decision, not a writing decision. Each platform has a native shape that its audience is calibrated to.
 
 Twitter is a punch — single thought, sharp angle, no preamble. The right length is "as short as possible while still landing." A 240-character post that feels complete will out-perform a 280-character post that feels stuffed.
@@ -47,6 +50,7 @@ Get this part wrong and the content reads as foreign no matter how good the writ
       "Voice consistency is what makes a feed feel like a brand instead of a collection of posts. Here's how to lock it in across a week of content.",
     date: "2026-05-01",
     readingMinutes: 4,
+    image: "/blog/consistent-voice.png",
     body: `A feed feels like a brand when its voice is consistent. Same vocabulary, same cadence, same level of formality from one post to the next.
 
 The mistake most people make is generating posts one at a time over the week — different mood, different prompt, different model run. The result is whiplash: Monday is wry, Tuesday is corporate, Wednesday is suddenly using emoji.

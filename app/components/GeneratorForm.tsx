@@ -84,7 +84,7 @@ function SegmentedControl<T extends string>({
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-0",
               "disabled:cursor-not-allowed disabled:opacity-50",
               selected
-                ? "bg-gradient-to-br from-[#FF6B9D]/15 to-[#FF9472]/15 text-white ring-1 ring-accent/30"
+                ? "bg-gradient-to-br from-[#7C3AED]/15 to-[#A855F7]/15 text-white ring-1 ring-accent/30"
                 : "text-mute hover:text-white",
             ].join(" ")}
           >
@@ -230,9 +230,9 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
           type="submit"
           disabled={loading}
           className={[
-            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#FF6B9D]/30 transition",
-            "bg-gradient-to-br from-[#FF6B9D] to-[#FF9472]",
-            "hover:shadow-xl hover:shadow-[#FF6B9D]/40 hover:brightness-110",
+            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#7C3AED]/30 transition",
+            "bg-gradient-to-br from-[#7C3AED] to-[#A855F7]",
+            "hover:shadow-xl hover:shadow-[#7C3AED]/40 hover:brightness-110",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel",
             "disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:brightness-100",
           ].join(" ")}

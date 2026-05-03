@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { POSTS, getAllPostSlugs, getPostBySlug } from "@/lib/posts";
@@ -26,11 +27,20 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
       description: post.description,
       url,
       publishedTime: post.date,
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: `Cover image for ${post.title}`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [post.image],
     },
   };
 }
@@ -54,8 +64,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         ← All posts
       </Link>
 
-      <article className="mt-8 space-y-6">
-        <header className="space-y-4 border-b border-hairline pb-8">
+      <article className="mt-8 space-y-8">
+        <header className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             {formattedDate} · {post.readingMinutes} min read
           </p>
@@ -67,7 +77,19 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </p>
         </header>
 
-        <div className="space-y-5 text-base leading-relaxed text-mute">
+        {/* Cover image — full-bleed within article width */}
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-hairline bg-panel shadow-2xl shadow-black/40">
+          <Image
+            src={post.image}
+            alt={`Cover image for ${post.title}`}
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+
+        <div className="space-y-5 border-t border-hairline pt-8 text-base leading-relaxed text-mute">
           {post.body
             .trim()
             .split(/\n\n+/)
@@ -79,7 +101,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <footer className="mt-12 border-t border-hairline pt-8">
           <Link
             href="/#generate"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#FF6B9D]/30 transition hover:shadow-xl hover:shadow-[#FF6B9D]/40 hover:brightness-110"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#7C3AED]/30 transition hover:shadow-xl hover:shadow-[#7C3AED]/40 hover:brightness-110"
           >
             Try the generator →
           </Link>
@@ -100,22 +122,44 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
       <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-mute">
         Keep reading
       </h2>
-      <ul className="mt-5 space-y-4">
-        {others.map((p) => (
-          <li key={p.slug}>
-            <Link
-              href={`/blog/${p.slug}`}
-              className="group block rounded-xl border border-hairline bg-panel p-5 transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-lg hover:shadow-black/40"
-            >
-              <h3 className="text-base font-semibold tracking-tight text-white transition group-hover:text-accent">
-                {p.title}
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-mute">
-                {p.description}
-              </p>
-            </Link>
-          </li>
-        ))}
+      <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {others.map((p) => {
+          const formatted = new Date(p.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+          return (
+            <li key={p.slug}>
+              <Link
+                href={`/blog/${p.slug}`}
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-panel transition hover:-translate-y-0.5 hover:border-white/15 hover:shadow-lg hover:shadow-black/40"
+              >
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={`Cover image for ${p.title}`}
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-4">
+                  <h3 className="text-base font-semibold leading-snug tracking-tight text-white transition group-hover:text-accent">
+                    {p.title}
+                  </h3>
+                  <time
+                    dateTime={p.date}
+                    className="font-mono text-xs uppercase tracking-wider text-mute/80"
+                  >
+                    {formatted}
+                  </time>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

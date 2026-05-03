@@ -100,7 +100,7 @@ function Nav() {
           <NavLink href="/blog">Blog</NavLink>
           <Link
             href="#generate"
-            className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-4 py-2 text-sm font-medium text-white shadow-lg shadow-[#FF6B9D]/20 transition hover:shadow-xl hover:shadow-[#FF6B9D]/30 hover:brightness-110"
+            className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-4 py-2 text-sm font-medium text-white shadow-lg shadow-[#7C3AED]/20 transition hover:shadow-xl hover:shadow-[#7C3AED]/30 hover:brightness-110"
           >
             Try it free
             <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -136,7 +136,7 @@ function Nav() {
             <Link
               href="#generate"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] px-4 py-2.5 text-sm font-medium text-white"
+              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-4 py-2.5 text-sm font-medium text-white"
             >
               Try it free
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -150,7 +150,7 @@ function Nav() {
 
 function Logo() {
   return (
-    <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
+    <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#A855F7] text-white shadow-md shadow-[#7C3AED]/30">
       <Sparkles className="h-3.5 w-3.5" aria-hidden />
     </span>
   );
@@ -230,25 +230,33 @@ function HeroBackground() {
         }}
       />
 
-      {/* Warm amber glow — bottom left (signature element) */}
+      {/* Warm amber glow — bottom-left signature.
+          Center is pushed well outside the hero so only the soft outer tail
+          of the gradient enters the visible area. Combined with the bottom
+          fade overlay below, this prevents any hard clip line at the section
+          boundary. */}
       <div
-        className="absolute -bottom-32 -left-40 h-[640px] w-[640px] rounded-full sm:-bottom-40 sm:-left-32"
+        className="absolute -bottom-[420px] -left-[260px] h-[900px] w-[900px] rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(255,163,77,0.30) 0%, rgba(255,163,77,0.12) 35%, transparent 70%)",
-          filter: "blur(80px)",
+            "radial-gradient(circle, rgba(255,163,77,0.45) 0%, rgba(255,163,77,0.20) 25%, rgba(255,163,77,0.06) 50%, transparent 75%)",
+          filter: "blur(120px)",
         }}
       />
 
-      {/* Soft pink-coral highlight on the opposite side for balance */}
+      {/* Counter-balance violet glow, top-right */}
       <div
-        className="absolute -right-40 -top-32 h-[520px] w-[520px] rounded-full"
+        className="absolute -right-[200px] -top-[180px] h-[620px] w-[620px] rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(255,107,157,0.18) 0%, rgba(255,107,157,0.06) 40%, transparent 70%)",
-          filter: "blur(90px)",
+            "radial-gradient(circle, rgba(124,58,237,0.22) 0%, rgba(124,58,237,0.08) 40%, transparent 75%)",
+          filter: "blur(110px)",
         }}
       />
+
+      {/* Soft fade-to-page-bg gradient at the bottom — guarantees the
+          hero/next-section boundary is invisible regardless of glow position. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
     </div>
   );
 }
@@ -314,7 +322,7 @@ function HowItWorks() {
               className="group relative flex flex-col gap-4 rounded-2xl border border-hairline bg-panel p-6 transition hover:border-white/15 sm:p-8"
             >
               <div className="flex items-center justify-between">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF6B9D] to-[#FF9472] text-white shadow-md shadow-[#FF6B9D]/30">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] text-white shadow-md shadow-[#7C3AED]/30">
                   <step.Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="font-mono text-xs font-medium tracking-wider text-mute/60">
