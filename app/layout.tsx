@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,9 +10,74 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NichePost AI — A week of social posts in 30 seconds",
-  description:
-    "AI-powered content calendars tailored to your niche, platform, and tone. Seven on-brand posts plus a matching cover image, ready to publish.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — A week of social posts in 30 seconds`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "AI content calendar",
+    "social media generator",
+    "AI social media posts",
+    "Instagram caption generator",
+    "LinkedIn post generator",
+    "Twitter thread generator",
+    "niche content marketing",
+    "AI marketing tool",
+    "content automation",
+    "social media planning",
+  ],
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — A week of social posts in 30 seconds`,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    locale: "en_US",
+    // app/opengraph-image.tsx auto-generates the 1200×630 image at /opengraph-image
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — A week of social posts in 30 seconds`,
+    description: SITE_DESCRIPTION,
+    creator: "@nichepostai",
+    // Twitter image auto-derives from openGraph image when not set
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  // Favicon + apple-touch-icon are auto-wired from app/icon.svg and app/apple-icon.tsx
+  category: "technology",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
+  ],
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

@@ -44,19 +44,66 @@ async function copyToClipboard(text: string): Promise<boolean> {
   }
 }
 
+function slugify(input: string): string {
+  return (
+    input
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 50) || "calendar"
+  );
+}
+
+function downloadTextFile(filename: string, text: string) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function extensionForDataUri(dataUri: string): string {
+  const mime = dataUri.match(/^data:([^;]+)/)?.[1] ?? "";
+  if (mime === "image/jpeg") return "jpg";
+  if (mime === "image/png") return "png";
+  if (mime === "image/webp") return "webp";
+  if (mime === "image/gif") return "gif";
+  return "img";
+}
+
+function downloadDataUri(filename: string, dataUri: string) {
+  const a = document.createElement("a");
+  a.href = dataUri;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 export default function ContentCalendar({
   posts,
   coverImage,
   niche,
 }: ContentCalendarProps) {
-  const [allCopied, setAllCopied] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
+  const [imageDownloaded, setImageDownloaded] = useState(false);
 
-  async function handleCopyAll() {
-    const ok = await copyToClipboard(formatCalendarForCopy(niche, posts));
-    if (ok) {
-      setAllCopied(true);
-      setTimeout(() => setAllCopied(false), 2000);
-    }
+  function handleDownloadAll() {
+    const filename = `nichepost-${slugify(niche)}.txt`;
+    downloadTextFile(filename, formatCalendarForCopy(niche, posts));
+    setDownloaded(true);
+    setTimeout(() => setDownloaded(false), 2000);
+  }
+
+  function handleDownloadImage() {
+    const ext = extensionForDataUri(coverImage);
+    downloadDataUri(`nichepost-${slugify(niche)}-cover.${ext}`, coverImage);
+    setImageDownloaded(true);
+    setTimeout(() => setImageDownloaded(false), 2000);
   }
 
   return (
@@ -79,18 +126,32 @@ export default function ContentCalendar({
                 {niche}
               </h2>
             </div>
-            <button
-              type="button"
-              onClick={handleCopyAll}
-              className="group relative inline-flex flex-none items-center justify-center gap-2 self-start rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition-all hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 sm:self-auto"
-            >
-              {allCopied ? (
-                <Check className="h-4 w-4 text-emerald-600" aria-hidden />
-              ) : (
-                <Download className="h-4 w-4" aria-hidden />
-              )}
-              {allCopied ? "Copied!" : "Download All"}
-            </button>
+            <div className="flex flex-col gap-2 self-start sm:flex-row sm:items-center sm:self-auto">
+              <button
+                type="button"
+                onClick={handleDownloadImage}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+              >
+                {imageDownloaded ? (
+                  <Check className="h-4 w-4 text-emerald-300" aria-hidden />
+                ) : (
+                  <Download className="h-4 w-4" aria-hidden />
+                )}
+                {imageDownloaded ? "Saved!" : "Download cover"}
+              </button>
+              <button
+                type="button"
+                onClick={handleDownloadAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition-all hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+              >
+                {downloaded ? (
+                  <Check className="h-4 w-4 text-emerald-600" aria-hidden />
+                ) : (
+                  <Download className="h-4 w-4" aria-hidden />
+                )}
+                {downloaded ? "Downloaded!" : "Download All"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
