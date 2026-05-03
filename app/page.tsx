@@ -212,26 +212,6 @@ function Hero() {
           Tell us your niche, pick a platform and tone, and get seven on-brand posts
           plus a matching cover image — written by AI, ready to publish.
         </p>
-
-        <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
-          <Link
-            href="#generate"
-            className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-stone-900/10 transition-all hover:bg-stone-800 hover:shadow-xl hover:shadow-stone-900/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2 dark:bg-stone-100 dark:text-stone-900 dark:shadow-stone-100/10 dark:hover:bg-white"
-          >
-            Generate your calendar
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-          <Link
-            href="#how"
-            className="inline-flex items-center gap-1 rounded-full border border-stone-300 bg-white/70 px-5 py-3 text-sm font-medium text-stone-700 backdrop-blur transition-colors hover:border-stone-400 hover:bg-white dark:border-stone-700 dark:bg-stone-900/70 dark:text-stone-300 dark:hover:border-stone-600 dark:hover:bg-stone-900"
-          >
-            See how it works
-          </Link>
-        </div>
-
-        <p className="mt-1 text-xs text-stone-500 dark:text-stone-500">
-          Free to try · No signup required
-        </p>
       </div>
     </section>
   );
