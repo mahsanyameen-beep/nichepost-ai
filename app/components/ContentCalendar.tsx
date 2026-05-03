@@ -109,22 +109,25 @@ export default function ContentCalendar({
   return (
     <section className="w-full max-w-6xl space-y-8">
       <div
-        className="relative overflow-hidden rounded-3xl border border-hairline shadow-2xl shadow-black/50"
+        className="relative overflow-hidden rounded-2xl border border-hairline bg-panel shadow-2xl shadow-black/50 sm:rounded-3xl"
         style={{
           boxShadow:
             "0 0 0 1px rgba(255,255,255,0.05), 0 30px 80px -20px rgba(107,91,209,0.30), 0 20px 50px -20px rgba(124,58,237,0.20)",
         }}
       >
-        <div className="relative aspect-[16/7] w-full bg-panel sm:aspect-[16/6]">
+        {/* Image — square on mobile (clearly visible), wide on desktop (hero feel) */}
+        <div className="relative aspect-square w-full bg-ink sm:aspect-[16/6]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={coverImage}
             alt={`Cover image for ${niche} content calendar`}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-8 lg:p-10">
-            <div className="space-y-2">
+
+          {/* Desktop: gradient overlay + content sit ON the image */}
+          <div className="absolute inset-0 hidden bg-gradient-to-t from-black/85 via-black/30 to-transparent sm:block" />
+          <div className="absolute inset-x-0 bottom-0 hidden p-6 sm:flex sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:p-8 lg:p-10">
+            <div className="min-w-0 flex-1 space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                 7-Day Content Calendar
               </p>
@@ -132,11 +135,11 @@ export default function ContentCalendar({
                 {niche}
               </h2>
             </div>
-            <div className="flex flex-col gap-2 self-start sm:flex-row sm:items-center sm:self-auto">
+            <div className="flex flex-none items-center gap-2">
               <button
                 type="button"
                 onClick={handleDownloadImage}
-                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
               >
                 {imageDownloaded ? (
                   <Check className="h-4 w-4 text-emerald-300" aria-hidden />
@@ -148,7 +151,7 @@ export default function ContentCalendar({
               <button
                 type="button"
                 onClick={handleDownloadAll}
-                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition-all hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+                className="inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-white/95 px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-lg backdrop-blur transition hover:bg-white hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
               >
                 {downloaded ? (
                   <Check className="h-4 w-4 text-emerald-600" aria-hidden />
@@ -158,6 +161,49 @@ export default function ContentCalendar({
                 {downloaded ? "Downloaded!" : "Download All"}
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile: title + buttons stacked BELOW the image, on the panel.
+            Image stays fully visible; buttons get real tap targets. */}
+        <div className="block border-t border-hairline p-5 sm:hidden">
+          <div className="space-y-1.5">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              7-Day Content Calendar
+            </p>
+            <h2 className="text-xl font-bold leading-tight text-white">
+              {niche}
+            </h2>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={handleDownloadImage}
+              className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-hairline bg-ink/60 px-3 text-sm font-semibold text-white transition hover:border-white/15 hover:bg-ink/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel"
+            >
+              {imageDownloaded ? (
+                <Check className="h-4 w-4 text-accent" aria-hidden />
+              ) : (
+                <Download className="h-4 w-4" aria-hidden />
+              )}
+              <span className="truncate">
+                {imageDownloaded ? "Saved!" : "Cover"}
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={handleDownloadAll}
+              className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-3 text-sm font-semibold text-white shadow-md shadow-[#7C3AED]/30 transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-panel"
+            >
+              {downloaded ? (
+                <Check className="h-4 w-4" aria-hidden />
+              ) : (
+                <Download className="h-4 w-4" aria-hidden />
+              )}
+              <span className="truncate">
+                {downloaded ? "Downloaded!" : "All posts"}
+              </span>
+            </button>
           </div>
         </div>
       </div>

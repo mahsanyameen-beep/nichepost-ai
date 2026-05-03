@@ -65,7 +65,7 @@ function FeaturedCard({ post }: { post: (typeof POSTS)[number] }) {
             fill
             sizes="(min-width: 1024px) 60vw, 100vw"
             priority
-            className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            className="recolor-cover object-cover transition duration-500 group-hover:scale-[1.02]"
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-ink/30 via-transparent to-transparent" />
         </div>
@@ -98,7 +98,7 @@ function PostCard({ post }: { post: (typeof POSTS)[number] }) {
           alt={`Cover image for ${post.title}`}
           fill
           sizes="(min-width: 640px) 50vw, 100vw"
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          className="recolor-cover object-cover transition duration-500 group-hover:scale-[1.03]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
       </div>

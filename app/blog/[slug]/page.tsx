@@ -85,7 +85,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             fill
             sizes="(min-width: 768px) 768px, 100vw"
             priority
-            className="object-cover"
+            className="recolor-cover object-cover"
           />
         </div>
 
@@ -141,7 +141,7 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
                     alt={`Cover image for ${p.title}`}
                     fill
                     sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    className="recolor-cover object-cover transition duration-500 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
                 </div>

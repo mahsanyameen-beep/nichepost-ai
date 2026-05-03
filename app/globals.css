@@ -37,3 +37,11 @@ select:focus-visible,
 a:focus-visible {
   outline: none;
 }
+
+/* Recolor blog cover images: shift the original pink/coral glows to
+   match the site's purple palette without re-rendering the PNGs.
+   Hue-rotate(-90deg) maps pink (~348°) -> purple (~258°); the small
+   saturate boost compensates for color flattening from the rotation. */
+.recolor-cover {
+  filter: hue-rotate(-90deg) saturate(1.1);
+}
