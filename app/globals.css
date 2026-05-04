@@ -45,36 +45,3 @@ a:focus-visible {
 .recolor-cover {
   filter: hue-rotate(-90deg) saturate(1.1);
 }
-
-/* Site-wide animated background: three drifting gradient blobs.
-   Lives behind everything via the AnimatedBackground component. */
-@keyframes np-drift-a {
-  0%, 100% { transform: translate3d(-10%, -8%, 0) scale(1); }
-  50%      { transform: translate3d(12%, 14%, 0) scale(1.15); }
-}
-@keyframes np-drift-b {
-  0%, 100% { transform: translate3d(8%, 10%, 0) scale(1.05); }
-  50%      { transform: translate3d(-14%, -12%, 0) scale(0.92); }
-}
-@keyframes np-drift-c {
-  0%, 100% { transform: translate3d(0%, 6%, 0) scale(0.95); }
-  50%      { transform: translate3d(6%, -10%, 0) scale(1.1); }
-}
-@keyframes np-grid-pan {
-  0%   { background-position: 0 0; }
-  100% { background-position: 48px 48px; }
-}
-
-.np-blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(110px);
-  will-change: transform;
-}
-.np-blob-a { animation: np-drift-a 22s ease-in-out infinite; }
-.np-blob-b { animation: np-drift-b 28s ease-in-out infinite; }
-.np-blob-c { animation: np-drift-c 34s ease-in-out infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .np-blob-a, .np-blob-b, .np-blob-c { animation: none; }
-}

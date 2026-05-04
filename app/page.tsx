@@ -98,12 +98,11 @@ function Nav() {
           <NavLink href="#features">Features</NavLink>
           <NavLink href="#how">How it works</NavLink>
           <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/login">Sign in</NavLink>
           <Link
-            href="/signup"
+            href="#generate"
             className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-4 py-2 text-sm font-medium text-white shadow-lg shadow-[#7C3AED]/20 transition hover:shadow-xl hover:shadow-[#7C3AED]/30 hover:brightness-110"
           >
-            Get started
+            Try it free
             <ArrowRight className="h-3.5 w-3.5" aria-hidden />
           </Link>
         </nav>
@@ -134,15 +133,12 @@ function Nav() {
             <MobileNavLink href="/blog" onClick={() => setOpen(false)}>
               Blog
             </MobileNavLink>
-            <MobileNavLink href="/login" onClick={() => setOpen(false)}>
-              Sign in
-            </MobileNavLink>
             <Link
-              href="/signup"
+              href="#generate"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-4 py-2.5 text-sm font-medium text-white"
             >
-              Get started
+              Try it free
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </Link>
           </nav>
