@@ -8,14 +8,9 @@ import {
   Coffee,
   Laugh,
   Loader2,
-  Lock,
-  LogIn,
   Sparkles,
-  UserPlus,
 } from "lucide-react";
-import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { useCurrentUser } from "./useCurrentUser";
 
 export type Platform = "Instagram" | "LinkedIn" | "Twitter";
 export type Tone = "Professional" | "Casual" | "Humorous";
@@ -118,7 +113,6 @@ async function postJson<T>(url: string, body: unknown): Promise<T> {
 }
 
 export default function GeneratorForm({ onResult }: GeneratorFormProps) {
-  const { user, loading: authLoading } = useCurrentUser();
   const [niche, setNiche] = useState("");
   const [platform, setPlatform] = useState<Platform>("Instagram");
   const [tone, setTone] = useState<Tone>("Professional");
@@ -126,17 +120,6 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
   const [contentError, setContentError] = useState<string | null>(null);
   const [imageError, setImageError] = useState<string | null>(null);
   const [nicheError, setNicheError] = useState<string | null>(null);
-
-  if (authLoading) {
-    return (
-      <div className="flex w-full max-w-2xl items-center justify-center rounded-2xl border border-hairline bg-panel p-10 shadow-2xl shadow-black/40 sm:p-12">
-        <Loader2 className="mr-2 h-5 w-5 animate-spin text-mute" aria-hidden />
-        <span className="text-sm text-mute">Checking your session…</span>
-      </div>
-    );
-  }
-
-  if (!user) return <SignInToGenerate />;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -279,39 +262,6 @@ export default function GeneratorForm({ onResult }: GeneratorFormProps) {
         )}
       </div>
     </form>
-  );
-}
-
-function SignInToGenerate() {
-  return (
-    <div className="w-full max-w-2xl rounded-2xl border border-hairline bg-panel p-8 text-center shadow-2xl shadow-black/40 sm:p-10">
-      <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] text-white shadow-md shadow-[#7C3AED]/30">
-        <Lock className="h-5 w-5" aria-hidden />
-      </span>
-      <h3 className="mt-5 text-xl font-semibold tracking-tight text-white">
-        Sign in to generate
-      </h3>
-      <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-mute">
-        Create a free account to generate your first 7-day content calendar — it
-        keeps your work tied to your profile.
-      </p>
-      <div className="mt-6 flex flex-col items-stretch justify-center gap-2 sm:flex-row">
-        <Link
-          href="/signup"
-          className="inline-flex items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#A855F7] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#7C3AED]/30 transition hover:brightness-110"
-        >
-          <UserPlus className="h-4 w-4" aria-hidden />
-          Create account
-        </Link>
-        <Link
-          href="/login"
-          className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-hairline bg-ink/60 px-5 py-2.5 text-sm font-semibold text-mute transition hover:border-white/20 hover:text-white"
-        >
-          <LogIn className="h-4 w-4" aria-hidden />
-          Sign in
-        </Link>
-      </div>
-    </div>
   );
 }
 

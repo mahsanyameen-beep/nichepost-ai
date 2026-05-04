@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { userIdFromCookieHeader } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -52,14 +51,6 @@ function detectImageMime(base64: string): string {
 }
 
 export async function POST(request: Request) {
-  const userId = userIdFromCookieHeader(request.headers.get("cookie"));
-  if (!userId) {
-    return NextResponse.json(
-      { error: "You must be signed in to generate images." },
-      { status: 401 },
-    );
-  }
-
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
   if (!accountId || !apiToken) {

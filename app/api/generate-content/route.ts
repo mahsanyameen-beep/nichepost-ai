@@ -1,6 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { NextResponse } from "next/server";
-import { userIdFromCookieHeader } from "@/lib/auth";
 
 type Platform = "Instagram" | "LinkedIn" | "Twitter";
 type Tone = "Professional" | "Casual" | "Humorous";
@@ -135,14 +134,6 @@ function isValidPlan(value: unknown): value is GeneratedPlan {
 }
 
 export async function POST(request: Request) {
-  const userId = userIdFromCookieHeader(request.headers.get("cookie"));
-  if (!userId) {
-    return NextResponse.json(
-      { error: "You must be signed in to generate content." },
-      { status: 401 },
-    );
-  }
-
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
